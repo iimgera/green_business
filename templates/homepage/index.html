@@ -1,0 +1,109 @@
+{% extends 'homepage/base.html' %}
+{% load static %}
+
+{% block content %}
+
+            <!--------------- hero section starts here --------------->
+            <div class="hero">
+                        <svg viewBox="0 0 800 600">
+                              <symbol id="s-text">
+                                <text text-anchor="middle"
+                                      x="50%"
+                                      y="35%"
+                                      class="text--line"
+                                      >
+                                    {{ general_main_title.title }}
+                                </text>
+                                <text text-anchor="middle"
+                                      x="50%"
+                                      y="68%"
+                                      class="text--line2"
+                                      >
+                                  {{ general_main_title.sub_title }}
+                                </text>
+                                
+                              </symbol>
+                              
+                              <g class="g-ants">
+                                <use xlink:href="#s-text"
+                                  class="text-copy"></use>     
+                                <use xlink:href="#s-text"
+                                  class="text-copy"></use>     
+                                <use xlink:href="#s-text"
+                                  class="text-copy"></use>     
+                                <use xlink:href="#s-text"
+                                  class="text-copy"></use>     
+                                <use xlink:href="#s-text"
+                                  class="text-copy"></use>     
+                              </g>
+                              
+                              
+                            </svg>
+                            
+            </div>
+
+            <div class="scroll-down"></div>
+            <!--------------- hero section ends here --------------->
+
+
+
+            <!--------------- projects section starts here --------------->
+            <div class="container-fluid">
+                  <br><br><br>
+
+                  <h6>Selected projects</h6>
+
+                  <div class="vertical"></div>
+                  <br>
+
+                  <div class="whitespace neya"></div>
+                  <div class="whitespace"></div>
+
+                  {% for article in articles %}
+
+                  <div class="row">
+                        <div class="col-lg-6">
+                              <p class="after">{{ article.title }}</p>
+                              <p>{{ article.description }}</p>
+                            <a class='animated-arrow' href="{% url 'articles' pk=article.pk %}">
+                                    <span class='the-arrow -left'>
+                                      <span class='shaft'></span>
+                                    </span>
+                                    <span class='main'>
+                                      <span class='text'>
+                                          <a href="{% url 'articles' pk=article.pk %}">О нас</a></li>
+                                      </span>
+                                      <span class='the-arrow -right'>
+                                        <span class='shaft'></span>
+                                      </span>
+                                    </span>
+                                  </a>
+                              
+                                   {% for review in article.reviews.all %}
+                                  <p>
+                                    {{ review.author }} 
+                                  </p>
+                                  <p>
+                                    "{{ review.review }}"
+                                  </p>
+                                   {% endfor %}
+                        </div>
+
+                        <div class="col-lg-6 project project1 wow fadeInUp" onclick="location.href='project.html'">
+                              <img src="{{ article.image.url }}" alt="">
+                        </div>
+                  </div>
+
+                  <div class="whitespace"></div>
+                  long-neglected
+
+
+                  <div class="whitespace"></div>
+
+                  {% endfor %}
+
+            </div>
+            <!--------------- projects section ends here --------------->
+
+
+{% endblock content %}

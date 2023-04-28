@@ -1,0 +1,206 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8"> 
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <meta name="author" content="harrnish">
+
+      <title>Portfolio Website Template</title>
+
+      <!-- stylesheet -->
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+      <!-- bootstrap cdns -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      <!-- google fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:100,100i,300,300i,400,400i,500,500i,700,700i"
+            rel="stylesheet">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+      <!-- terminal effect -->
+      <script src="{% static 'js/t.min.js' %}"></script>
+
+      <!-- for on scroll animations -->
+      <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+      <script src="{% static 'js/wow.min.js' %}"></script>
+
+</head>
+
+<body class="index">
+      <div class="wrapper">
+
+            <!--------------- navbar starts here --------------->
+            <nav>
+                  <ul id="menu" class="nav-menu">
+                      <li>
+                        {% load i18n %}
+                        <div style="display: flex; align-items: center;">
+                              <form action="{% url 'set_language' %}" method="post">
+                                {% csrf_token %}
+                                <input name="next" type="hidden" value="{{ request.path }}">
+                                <select name="language" style="margin-right: 10px;">
+                                    <option value="en"{% if request.LANGUAGE_CODE == 'en' %} selected{% endif %}>English</option>
+                                    <option value="ru"{% if request.LANGUAGE_CODE == 'ru' %} selected{% endif %}>Русский</option>
+                                </select>
+                                <button type="submit">{% trans "Go" %}</button>
+                              </form>
+                            </div>
+                      </li>
+                      <li><a href="{% url 'home' %}">Главная</a></li>
+                      <li><a href="{% url 'works' %}">Проекты</a></li>
+                      <li><a href="{% url 'about' %}">О нас</a></li>
+                      <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                  </ul>
+              
+                  <span id="brand" class="nav-brand">
+                      <a href="{% url 'home' %}">{{ page_info.site_name }}</a>
+                  </span>
+              
+                  <div id="toggle">
+                      <div class="span">Меню</div>
+                  </div>
+              </nav>
+              
+
+            <div id="resize">
+                  <div class="close-btn">&times;</div>
+
+                  <ul id="menu">
+                        <li><a href="{% url 'home' %}">Главная</a></li>
+                        <li><a href="{% url 'works' %}">Проекты</a></li>
+                        <li><a href="{% url 'about' %}">О нас</a></li>
+                        <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                  </ul>
+            </div>
+            <!--------------- navbar ends here --------------->
+
+
+
+            {% block content%}
+            {% endblock content %}
+
+
+            <!--------------- footer starts here --------------->
+            <div class="footer">
+                  <div class="container">
+                        <br><br>
+
+                        <div class="collab">
+                              <div class="row">
+                                    <div class="col-lg-12">
+                                          <p class="wow fadeInUp">{{ page_info.help_text }}</p>
+                                    </div>
+                              </div>
+                        </div>
+
+                        <br>
+
+                        <div class="hr">
+                              <div class="row"></div>
+                        </div>
+
+                        <br><br>
+
+                        <div class="info">
+                              <div class="row">
+                                    <div class="col-lg-4" id="personal">
+                                          <p class="wow fadeInUp">connect with us</p>
+                                          <h4 class="wow fadeInUp" data-wow-delay="0.2s"><a href="#">ig {{ page_info.email }}</a>
+                                          </h4>
+                                          <br><br>
+                                    </div>
+
+                                    <div class="col-lg-4" id="media">
+                                          <p class="wow fadeInUp" data-wow-delay="0s">follow us</p>
+
+                                          <div id="footer-socials">
+                                                <div class="socials inline-inside socials-colored">
+                        
+                                                  <a href="#" target="_blank" title="Facebook" class="socials-item">
+                                                      <i class="fab fa-facebook-f facebook"></i>
+                                                  </a>
+                                                  <a href="#" target="_blank" title="Twitter" class="socials-item">
+                                                      <i class="fab fa-twitter twitter"></i>
+                        
+                                                  </a>
+                                                  <a href="#" target="_blank" title="Instagram" class="socials-item">
+                                                      <i class="fab fa-instagram instagram"></i>
+                                                  </a>
+                                                  <a href="#" target="_blank" title="YouTube" class="socials-item">
+                                                      <i class="fab fa-youtube youtube"></i>
+                                                  </a>
+                                                  <a href="#" target="_blank" title="Telegram" class="socials-item">
+                                                      <i class="fab fa-telegram telegram"></i>
+                                                  </a>
+                                                </div>
+                                            </div>
+
+                                          <br><br>
+                                    </div>
+
+                                    <div class="col-lg-4" id="address">
+                                          <p class="wow fadeInUp" data-wow-delay="0s">say hello</p>
+                                          <h4 class="wow fadeInUp" data-wow-delay="0.2s"><a
+                                                      href="#">{{ page_info.email }}</a> </h4>
+                                          <br><br>
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+            <!--------------- footer ends here --------------->
+
+
+      </div>
+
+      <!-- greensock cdn -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+
+      <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+      <script type="text/javascript">
+
+            // navigation starts here
+
+            $("#toggle").click(function () {
+                  $(this).toggleClass('on');
+                  $("#resize").toggleClass("active");
+            });
+
+            $("#resize ul li a").click(function () {
+                  $(this).toggleClass('on');
+                  $("#resize").toggleClass("active");
+            });
+
+            $(".close-btn").click(function () {
+                  $(this).toggleClass('on');
+                  $("#resize").toggleClass("active");
+            });
+
+            // navigation ends here
+
+            // nav animation
+
+            TweenMax.from("#brand", 1, {
+                  delay: 0.4,
+                  y: 10,
+                  opacity: 0,
+                  ease: Expo.easeInOut
+            })
+
+            TweenMax.staggerFrom("#menu li a", 1, {
+                  delay: 0.4,
+                  opacity: 0,
+                  ease: Expo.easeInOut
+            }, 0.1);
+
+            // nav animation ends
+
+            new WOW().init();
+
+      </script>
+</body>
+
+</html>
